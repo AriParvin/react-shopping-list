@@ -11,6 +11,18 @@ const App = () => {
         { itemName: 'item 2', quantity: 3, isSelected: true },
         { itemName: 'item 3', quantity: 2, isSelected: false },
     ]);
+    const handleAddButtonClick = () => {
+        const newItem = {
+            itemName: inputValue,
+            quantity: 1,
+            isSelected: false,
+        };
+
+        const newItems = [...items, newItem];
+
+        setItems(newItems);
+        setInputValue('');
+    };
 
     return (
         <div className='app-background'>
