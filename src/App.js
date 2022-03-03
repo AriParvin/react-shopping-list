@@ -34,7 +34,7 @@ const App = () => {
                         className='add-item-input'
                         placeholder='Add an item...'
                     />
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faPlus} onClick={() => handleAddButtonClick()} />
                 </div>
                 <div className='item-list'>
                     {items.map((item, index) => (
