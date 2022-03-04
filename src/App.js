@@ -11,12 +11,6 @@ const App = () => {
         { itemName: 'item 2', quantity: 3, isSelected: true },
         { itemName: 'item 3', quantity: 2, isSelected: false },
     ]);
-    const toggleComplete = (index) => {
-        const newItems = [...items];
-        newItems[index].isSelected = !newItems[index].isSelected;
-        setItems(newItems);
-    };
-
     const handleAddButtonClick = () => {
         const newItem = {
             itemName: inputValue,
@@ -24,6 +18,26 @@ const App = () => {
             isSelected: false,
         };
         setInputValue('');
+    };
+    const toggleComplete = (index) => {
+        const newItems = [...items];
+        newItems[index].isSelected = !newItems[index].isSelected;
+        setItems(newItems);
+    };
+
+    const handleQuantityIncrease = (index) => {
+        const newItems = [...items];
+
+        newItems[index].quantity++;
+
+        setItems(newItems);
+    };
+    const handleQuantityDecrease = (index) => {
+        const newItems = [...items];
+
+        newItems[index].quantity--;
+
+        setItems(newItems);
     };
 
     return (
@@ -56,11 +70,11 @@ const App = () => {
                             </div>
                             <div className='quantity'>
                                 <button>
-                                    <FontAwesomeIcon icon={faChevronLeft} />
+                                    <FontAwesomeIcon icon={faChevronLeft} onClick={() => handleQuantityDecrease(index)} />
                                 </button>
                                 <span> {item.quantity} </span>
                                 <button>
-                                    <FontAwesomeIcon icon={faChevronRight} />
+                                    <FontAwesomeIcon icon={faChevronRight} onClick={() => handleQuantityIncrease(index)} />
                                 </button>
                             </div>
                         </div>
