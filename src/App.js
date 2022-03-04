@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const App = () => {
     const [inputValue, setInputValue] = useState('');
-    const [totalItemCount, setTotalItemCount] = useState(6);
+    const [totalItemCount, setTotalItemCount] = useState(0);
 
-    const [items, setItems] = useState([
-        { itemName: 'item 1', quantity: 1, isSelected: false },
-        { itemName: 'item 2', quantity: 3, isSelected: true },
-        { itemName: 'item 3', quantity: 2, isSelected: false },
-    ]);
-    const handleAddButtonClick = () => {
+    const [items, setItems] = useState([{ itemName: 'item', quantity: 0, isSelected: false }]);
+    const handleAddButtonClick = (index) => {
         const newItem = {
             itemName: inputValue,
             quantity: 1,
             isSelected: false,
         };
         const newItems = [...items, newItem];
+
         setItems(newItems);
         setInputValue('');
         calculateTotal();
@@ -45,10 +42,13 @@ const App = () => {
         setItems(newItems);
         calculateTotal();
     };
+    //  const handleDeleteItem = (index) =>{
+    //      const newItems = [...items];
+
     const calculateTotal = () => {
         const totalItemCount = items.reduce((total, item) => {
             return total + item.quantity;
-        }, 0);
+        }, 1);
         setTotalItemCount(totalItemCount);
     };
 
@@ -67,6 +67,11 @@ const App = () => {
                 <div className='item-list'>
                     {items.map((item, index) => (
                         <div className='item-container'>
+                            <div cassName='remove-button'>
+                                <button class='trash-button'>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </button>
+                            </div>
                             <div className='item-name' onClick={() => toggleComplete(index)}>
                                 {item.isSelected ? (
                                     <>
