@@ -11,16 +11,18 @@ const App = () => {
         { itemName: 'item 2', quantity: 3, isSelected: true },
         { itemName: 'item 3', quantity: 2, isSelected: false },
     ]);
+    const toggleComplete = (index) => {
+        const newItems = [...items];
+        newItems[index].isSelected = !newItems[index].isSelected;
+        setItems(newItems);
+    };
+
     const handleAddButtonClick = () => {
         const newItem = {
             itemName: inputValue,
             quantity: 1,
             isSelected: false,
         };
-
-        const newItems = [...items, newItem];
-
-        setItems(newItems);
         setInputValue('');
     };
 
@@ -39,7 +41,7 @@ const App = () => {
                 <div className='item-list'>
                     {items.map((item, index) => (
                         <div className='item-container'>
-                            <div className='item-name'>
+                            <div className='item-name' onClick={() => toggleComplete(index)}>
                                 {item.isSelected ? (
                                     <>
                                         <FontAwesomeIcon icon={faCheckCircle} />
